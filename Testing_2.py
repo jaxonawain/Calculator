@@ -1,31 +1,6 @@
 import string
+
 operators = ['+', '/', '*', '-']
-possible_first_char = ['-']
-for item in string.digits:
-    possible_first_char.append(item)
-
-
-def test_values(user_input):
-    i = 0
-    operator_index = -1
-    valid_entry = []
-    valid_return_values = ""
-    for character in user_input:
-        operator_index += 1
-
-        if user_input[0] not in possible_first_char:
-            print("Invalid first character, exiting")
-            exit()
-        elif user_input[-1] not in string.digits:
-            print('Invalid Entry. Exiting')
-            exit()
-
-        elif character in operators and user_input[(user_input.index(character) + 1)] in operators[:3]:
-            print('Cannot have two operators back to back, exiting.')
-            exit()
-        valid_entry.extend(character)
-        valid_return_values = ''.join(valid_entry)
-    return valid_return_values
 
 
 def parse_equation(user_input):
@@ -57,12 +32,28 @@ def parse_equation(user_input):
         if temp_list:
             temp_str = ''.join(temp_list)
             equation.append(temp_str)
+
+
     return (equation)
 
 
-try_again = True
-while try_again:
+def evaluate(equation):
+    print(equation)
+    running_equation = []
+    temp = []
+    for obj in equation:
+        if obj in operators:
+            if obj == '-':
+                result = int(equation[(equation.index(obj) - 1)]) - int(equation[(equation.index(obj) + 1)])
+                result_str = str(result)
+                running_equation.append(result_str)
+                if len(running_equation) != 1:
+                    running_equation.extend(equation[(equation.index(obj) + 2):])
 
-    values = input('Waiting for input: ')
-    valid_values = (test_values(values))
-    print(parse_equation(valid_values))
+    while len(running_equation) > 1:
+        evaluate(running_equation)
+
+    return running_equation
+
+
+print(evaluate(parse_equation('1-2-1')))

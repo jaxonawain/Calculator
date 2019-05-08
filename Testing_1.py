@@ -3,9 +3,8 @@ import string
 operators = ['+', '/', '*', '-']
 possible_first_char = ['-']
 
-for item in string.digits:
-    possible_first_char.append(item)
-temp_space = []
+for digit in string.digits:
+    possible_first_char.append(digit)
 instance = 0
 
 
@@ -14,10 +13,11 @@ def evaluate(values_to_eval):
     seq_val_str = ""
     equation = []
 
-    seq_val_temp.append(values_to_eval[0])
+    seq_val_temp.append(values_to_eval[1])
 
     for c in values_to_eval:
         print(values_to_eval.index(c))
+        print(c)
         if c not in operators:
             seq_val_temp.extend(c)
             seq_val_str = ''.join(seq_val_temp)
