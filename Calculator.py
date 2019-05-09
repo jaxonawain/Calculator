@@ -1,8 +1,10 @@
 import string
 operators = ['+', '/', '*', '-']
-possible_first_char = ['-']
+possible_first_char = ['-','(']
+possible_mid_char = ['(',')']
 for item in string.digits:
     possible_first_char.append(item)
+    possible_mid_char.append(item)
 
 
 def test_values(user_input):
@@ -14,9 +16,10 @@ def test_values(user_input):
         operator_index += 1
 
         if user_input[0] not in possible_first_char:
+
             print("Invalid first character, exiting")
             exit()
-        elif user_input[-1] not in string.digits:
+        elif user_input[-1] not in possible_mid_char:
             print('Invalid Entry. Exiting')
             exit()
 
@@ -32,10 +35,13 @@ def parse_equation(user_input):
     equation = []
     temp_list = []
     temp_str = None
-    if user_input[0] == '-':
-        temp_list.extend('-')
+    if user_input[0] in ['-','(']:
+        if user_input[0] == '(' and user_input[1] == '-':
+            temp_list.extend(user_input[:1])
+        else:
+            temp_list.extend(user_input[0])
         for c in user_input[1:]:
-            if c not in operators and c in string.digits:
+            if c not in operators and c in possible_mid_char:
                 temp_list.extend(c)
             elif c in operators:
                 temp_str = ''.join(temp_list)
@@ -47,7 +53,7 @@ def parse_equation(user_input):
             equation.append(temp_str)
     elif user_input[0] != '-':
         for c in user_input:
-            if c not in operators and c in string.digits:
+            if c not in operators and c in possible_mid_char:
                 temp_list.extend(c)
             elif c in operators:
                 temp_str = ''.join(temp_list)
