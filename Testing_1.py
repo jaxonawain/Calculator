@@ -77,7 +77,7 @@ def evaluate(values_to_eval):
 
 
 
-testing = evaluate('-3-3-3-3')
+testing = evaluate('3-3-3-3')
 
 
 print(testing)
