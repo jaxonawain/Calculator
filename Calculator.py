@@ -1,12 +1,20 @@
 import string
+
+#Set Operators list
 operators = ['+', '/', '*', '-']
+
+#Set - or ( as possible first characters
 possible_first_char = ['-','(']
-possible_mid_char = ['(',')']
+
+#set () as valid characters
+possible_mid_char = ['(',')','-']
+
+#Append 0-9 to the possible characters list
 for item in string.digits:
     possible_first_char.append(item)
     possible_mid_char.append(item)
 
-
+#Tests user input to ensure it's valid
 def test_values(user_input):
     i = 0
     operator_index = -1
@@ -34,6 +42,7 @@ def test_values(user_input):
 def parse_equation(user_input):
     equation = []
     temp_list = []
+#BROKEENNNNNe
     temp_str = None
     if user_input[0] in ['-','(']:
         if user_input[0] == '(' and user_input[1] == '-':
