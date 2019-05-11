@@ -13,7 +13,7 @@ def operate(start, operation, stop):
         return start * stop
     elif operation == '/':
         return start / stop
-# Set valid values. Note that - is also an operater. FFuckk me.
+# Set valid values. Note that - is also an operator, unfckingfortunately
 
 
 valid_values = ['(',')','-']
