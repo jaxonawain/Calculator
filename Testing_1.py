@@ -12,12 +12,8 @@ def evaluate(values_to_eval):
     seq_val_temp = []
     seq_val_str = ""
     equation = []
-
-    seq_val_temp.append(values_to_eval[1])
-
     for c in values_to_eval:
-        print(values_to_eval.index(c))
-        print(c)
+
         if c not in operators:
             seq_val_temp.extend(c)
             seq_val_str = ''.join(seq_val_temp)
@@ -58,13 +54,12 @@ def evaluate(values_to_eval):
                 temp_str = ''.join(temp_space)
                 while len(temp_space) > 0:
                     evaluate(temp_str)
-                    print(temp_str)
+
                     exit()
 
         if item == multiplication or division:
             if item == multiplication:
                 temp_space = []
-                print(equation)
                 result = int(equation[(equation.index(item) - 1)]) * int(equation[(equation.index(item) + 1)])
                 result_str = str(result)
                 temp_space.append(result_str)
@@ -72,12 +67,12 @@ def evaluate(values_to_eval):
                 temp_str = ''.join(temp_space)
                 while len(temp_space) > 0:
                     evaluate(temp_str)
-                    print(temp_str)
                     exit()
 
 
 
-testing = evaluate('3-3-3-3')
+
+testing = evaluate('3-3')
 
 
 print(testing)

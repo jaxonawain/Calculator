@@ -9,7 +9,6 @@ def evaluate(equation):
     temp = []
     for obj in equation:
         if obj in operators:
-            if obj == '-' or obj == '+':
                 if obj == '-':
                     print(equation)
                     result = int(equation[(equation.index(obj) - 1)]) - int(equation[(equation.index(obj) + 1)])
