@@ -9,16 +9,8 @@ for digit in string.digits:
 
 print(valid_values)
 
+paren = ['(','-']
 
-def operate(start, stop, operation):
-    if operation == '-':
-        return start - stop
-    elif operation == '+':
-        return start + stop
-    elif operators == '*':
-        return start * stop
-    elif operators == '/':
-        return start / stop
 
 temp = []
 result = 0
@@ -29,8 +21,8 @@ def evaluate(data):
         stop = 0
         if '(' in obj:
             first_two_char = [data[data.index(obj) + 1],data[data.index(obj) + 1]]
-            if obj == '-' or obj == '+':
-
+            if first_two_char in paren:
+                print('fucking aaaa')
                 start = data.index(obj)
                 operator = data[start + 1]
                 for obj in data:

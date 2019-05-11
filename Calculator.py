@@ -39,13 +39,19 @@ def test_values(user_input):
 
 #Parse the equation into a ["value","operator","value"] format for evaluation. Parenthesis should be glued to the value. (IE: (-1-1) == ['(-1','-','1)']. The evaluator can look for an index of either 0 or -1 and find that
 #the value is ( or ) and determine that that needs to be evaluated first. The evaluation should strip the parenthesis, and return the value, and run the renewed equation through the evaluator till only 1 value exists.
+#This parser now accepts -(-value)
+
+
 def parse_equation(user_input):
     equation = []
     temp_list = []
 
     if user_input[0] in ['-','(']:
         if user_input[0] == '(' and user_input[1] == '-':
-            temp_list.extend(user_input[:1])
+            temp_list.extend(user_input[:3])
+        elif user_input[0] == '(' and user_input[1] == '-':
+            temp_list.extend(user_input[:4])
+
         else:
             temp_list.extend(user_input[0])
 
@@ -81,4 +87,6 @@ while try_again:
 
     values = input('Waiting for input: ')
     valid_values = (test_values(values))
-    print(parse_equation(valid_values))
+    print(f"To pass this value through the evaluator: {parse_equation(valid_values)}")
+
+
