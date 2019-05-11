@@ -1,6 +1,6 @@
 import string
 # Set data to evaluate. This will be passed to through the parser.
-data = ['(-1','-','1)','-','1',')']
+data = ['-(-1','-','1)','-','1']
 
 # Set valid operators and create an operator function
 
@@ -28,19 +28,17 @@ result = 0
 
 
 def evaluate(data):
+    start = 0
+    stop = 0
     for obj in data:
-        print(data.index(value))
-        if obj[0] == '(':
-            print('shit')
-            if obj[1] == '-':
-                start = int(obj[2:]) * -1
-                stop = int(data[data.index(obj) + 2])
-                operator = data[data.index(obj) + 1]
-                op_result = operate(start,operator, stop)
-                print(stop)
-
-                if (data[data.index(obj) + 4])[-1] == ')':
-                    print('fu')
+        buffer = []
+        print(obj)
+        if '-' == obj[0] and '(' == obj[1] and '-' == obj[2]:
+            start = int(obj[3:]) * -1
+            print(start)
+            for item in data:
+                if ')' in item:
+                    print('stop')
 
 
 evaluate(data)
