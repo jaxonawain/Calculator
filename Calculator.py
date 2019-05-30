@@ -37,50 +37,33 @@ def test_values(user_input):
         valid_return_values = ''.join(valid_entry)
     return valid_return_values
 
-#Parse the equation into a ["value","operator","value"] format for evaluation. Parenthesis should be glued to the value. (IE: (-1-1) == ['(-1','-','1)']. The evaluator can look for an index of either 0 or -1 and find that
-#the value is ( or ) and determine that that needs to be evaluated first. The evaluation should strip the parenthesis, and return the value, and run the renewed equation through the evaluator till only 1 value exists.
-#This parser now accepts -(-value)
-
-
+#Parse the equation into a ["value","operator","value"] format for evaluation. opbuffer is a buffer used to store sequences of non-integer type characters. intbuffer stores floats.
+#The buffers store values until a nonvalid value type occurs. Then it condenses the buffer, and appends that result to the equation.
 def parse_equation(user_input):
     equation = []
-    temp_list = []
-
-    if user_input[0] in ['-','(']:
-        if user_input[0] == '(' and user_input[1] == '-':
-            temp_list.extend(user_input[:3])
-        elif user_input[0] == '(' and user_input[1] == '-':
-            temp_list.extend(user_input[:4])
-
+    intbuffer = []
+    opbuffer = []
+    for c in user_input:
+        if c in string.digits:
+            if opbuffer:
+                value = ''.join(opbuffer)
+                equation.append(value)
+                opbuffer = []
+            intbuffer.extend(c)
         else:
-            temp_list.extend(user_input[0])
+            if intbuffer:
+                value = ''.join(intbuffer)
+                equation.append(float(value))
+                intbuffer = []
+            opbuffer.extend(c)
+    if opbuffer:
+        value = ''.join(opbuffer)
+        equation.append(value)
 
-        for c in user_input[1:]:
-            if c not in operators and c in possible_mid_char:
-                temp_list.extend(c)
-
-            elif c in operators:
-                temp_str = ''.join(temp_list)
-                equation.append(temp_str)
-                equation.append(c)
-                temp_list = []
-        if temp_list:
-            temp_str = ''.join(temp_list)
-            equation.append(temp_str)
-    elif user_input[0] != '-':
-        for c in user_input:
-            if c not in operators and c in possible_mid_char:
-                temp_list.extend(c)
-            elif c in operators:
-                temp_str = ''.join(temp_list)
-                equation.append(temp_str)
-                equation.append(c)
-                temp_list = []
-        if temp_list:
-            temp_str = ''.join(temp_list)
-            equation.append(temp_str)
-    return (equation)
-
+    if intbuffer:
+        value = ''.join(intbuffer)
+        equation.append(float(value))
+    print(equation)
 
 try_again = True
 while try_again:
