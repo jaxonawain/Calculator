@@ -63,6 +63,8 @@ def parse_equation(user_input):
     if intbuffer:
         value = ''.join(intbuffer)
         equation.append(float(value))
+    equation.append('@')
+    equation.insert(0, '@')
     print(equation)
 
 try_again = True
